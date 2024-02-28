@@ -13,7 +13,7 @@ export default async function RootPage() {
   // revalidatePath('/home');
   // redirect('/home');
   return (
-    <div>
+    <div className="main">
       <h2>Main Content</h2>
     </div>
   );
