@@ -26,22 +26,23 @@ export const config = {
   ],
   callbacks: {
     authorized({ request, auth }) {
-      console.log('🚀🚀🚀 ~ auth:', auth);
-      console.log('🚀🚀🚀 ~ request:', request);
+      console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ auth:', auth);
+      console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ request:', request);
+
       const { pathname } = request.nextUrl;
       // TODO: update the path later to suit
-      if (pathname === '/signin') return !!auth;
+      if (pathname === '/') return !!auth;
       return true;
     },
     async session({ session, token, user }) {
-      console.log("🚀🚀🚀 ~ user:", user);
-      console.log("🚀🚀🚀 ~ token:", token);
-      console.log("🚀🚀🚀 ~ session:", session);
+      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ user:', user);
+      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ token:', token);
+      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ session:', session);
+
       // Send properties to the client, like an access_token and user id from a provider.
-      
-      
+
       return session;
-    }
+    },
   },
   // pages: {
   //   signIn: '/signin',
