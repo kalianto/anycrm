@@ -56,3 +56,13 @@
 .form-group button:hover {
   background-color: #2980b9;
 }
+
+.form-group .btn-facebook {
+  background: #3b579d;
+  color: #ffffff;
+}
+
+.form-group .btn-google {
+  background: #dc4a38;
+  color: #ffffff;
+}
