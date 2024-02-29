@@ -1,8 +1,7 @@
 'use server';
 import { auth } from '../../auth';
-import SignInPage from '@/components/auth-components';
-// import { redirect } from 'next/navigation';
-// import { revalidatePath } from 'next/cache';
+import SignInPage from '@/components/authComponents';
+
 
 export default async function RootPage() {
   const session = await auth();
@@ -10,11 +9,9 @@ export default async function RootPage() {
     return <SignInPage />;
   }
 
-  // revalidatePath('/home');
-  // redirect('/home');
   return (
     <div className="main">
-      <h2>Main Content</h2>
+      <h2>Welcome {session?.user?.name}</h2>
     </div>
   );
 }

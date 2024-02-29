@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
 import { auth } from '../../auth';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primeicons/primeicons.css';
 import AppHeader from '@/components/appHeader';
 import AppSideNav from '@/components/appSideNav';
 import { SessionProvider } from 'next-auth/react';
+import { CustomProvider } from 'rsuite';
+// import 'rsuite/dist/rsuite-no-reset.min.css';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +28,9 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <AppHeader />
           <AppSideNav />
-          <main>{children}</main>
+          <main>
+            <CustomProvider theme='dark'>{children}</CustomProvider>
+          </main>
         </SessionProvider>
       </body>
     </html>

@@ -1,5 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
+import UserButton from './userButton';
 
 export default function AppHeader() {
   const { data: session, update } = useSession();
@@ -8,7 +9,12 @@ export default function AppHeader() {
 
   return (
     <header>
-      <h1>Dashboard</h1>
+      <div className='header-wrapper'>
+        <div className='header-body'>
+          <h1 className='title'>Dashboard</h1>
+          <UserButton />
+        </div>
+      </div>
     </header>
   );
 }

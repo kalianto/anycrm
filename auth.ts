@@ -4,9 +4,9 @@ import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
 
 export const config = {
-  theme: {
-    logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
-  },
+  // theme: {
+  //   logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
+  // },
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
@@ -26,8 +26,8 @@ export const config = {
   ],
   callbacks: {
     authorized({ request, auth }) {
-      console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ auth:', auth);
-      console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ request:', request);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ auth:', auth);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:29 ~ request:', request);
 
       const { pathname } = request.nextUrl;
       // TODO: update the path later to suit
@@ -35,9 +35,9 @@ export const config = {
       return true;
     },
     async session({ session, token, user }) {
-      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ user:', user);
-      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ token:', token);
-      console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ session:', session);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ user:', user);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ token:', token);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ session:', session);
 
       // Send properties to the client, like an access_token and user id from a provider.
 
@@ -49,4 +49,9 @@ export const config = {
   // },
 } satisfies NextAuthConfig;
 
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+export const {
+  handlers,
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(config);
