@@ -155,15 +155,13 @@ nav .nav-footer-body {
   padding: 20px 15px;
 }
 
-.main {
+main {
   margin-left: 250px;
   padding: 20px;
 }
 
-
-
-.header-wrapper {
-  /* padding-top: 10px; */
+.main {
+  padding: 10px;
 }
 
 .header-body {
@@ -181,6 +179,25 @@ header .title {
   right: 20px;
 }
 
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.7rem;
+}
+h3 {
+  font-size: 1.4rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+h5 {
+  font-size: 1rem;
+}
+h6 {
+  font-size: 0.8rem;
+}
+
 @media only screen and (max-width: 768px) {
   nav {
     width: 100%;
@@ -194,7 +211,7 @@ header .title {
     border-bottom: none;
   }
 
-  .main {
+  main {
     margin-left: 0;
   }
 

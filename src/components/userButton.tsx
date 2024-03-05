@@ -7,7 +7,7 @@ import { SignOut } from '@/components/authComponents';
 export default function UserButton() {
   const { data: session } = useSession();
 
-  if (!session?.user) return null;
+  // if (!session?.user) return null;
 
   const userImage: string =
     session?.user.image ||

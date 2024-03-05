@@ -5,7 +5,7 @@ import UserButton from './userButton';
 export default function AppHeader() {
   const { data: session, update } = useSession();
 
-  if (!session?.user) return null;
+  // if (!session?.user) return null;
 
   return (
     <header>

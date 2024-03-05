@@ -5,7 +5,7 @@ import { SignOut } from '@/components/authComponents';
 
 export default async function AppSideNav() {
   const session = await auth();
-  if (!session?.user) return null;
+  // if (!session?.user) return null;
 
   return (
     <nav>

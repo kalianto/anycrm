@@ -5,9 +5,9 @@ import SignInPage from '@/components/authComponents';
 
 export default async function RootPage() {
   const session = await auth();
-  if (!session) {
-    return <SignInPage />;
-  }
+  // if (!session) {
+  //   return <SignInPage />;
+  // }
 
   return (
     <div className="main">

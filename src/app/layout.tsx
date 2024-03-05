@@ -5,6 +5,7 @@ import AppHeader from '@/components/appHeader';
 import AppSideNav from '@/components/appSideNav';
 import { SessionProvider } from 'next-auth/react';
 import { CustomProvider } from 'rsuite';
+import SignInPage from '@/components/authComponents';
 // import 'rsuite/dist/rsuite-no-reset.min.css';
 import './globals.css';
 
@@ -22,6 +23,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+
+  if (!session) {
+    return (
+      <html lang='en'>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <SignInPage />
+      </body>
+      </html>
+    );
+  }
+
   return (
     <html lang='en'>
       <body className={inter.className} suppressHydrationWarning={true}>
