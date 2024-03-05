@@ -6,7 +6,6 @@ import AppSideNav from '@/components/appSideNav';
 import { SessionProvider } from 'next-auth/react';
 import { CustomProvider } from 'rsuite';
 import SignInPage from '@/components/authComponents';
-// import 'rsuite/dist/rsuite-no-reset.min.css';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });

@@ -2,7 +2,7 @@
 import { useSession } from 'next-auth/react';
 import { Avatar, AvatarProps, Button, Dropdown } from 'rsuite';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
-import { SignOut } from '@/components/authComponents';
+import Link from 'next/link';
 
 export default function UserButton() {
   const { data: session } = useSession();
@@ -31,7 +31,9 @@ export default function UserButton() {
           </div>
         </Dropdown.Item>
         <Dropdown.Item icon={<FaUser />}>
+          <Link href='/profile'>
           <span className='title'>Profile</span>
+          </Link>
         </Dropdown.Item>
       </Dropdown>
     </div>

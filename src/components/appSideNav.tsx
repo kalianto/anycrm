@@ -17,8 +17,8 @@ export default async function AppSideNav() {
           </div>
         </div>
         <div className='nav-menu'>
-          <Link href='/home'>Home</Link>
-          <Link href='/signin'>Sign In</Link>
+          <Link href='/'>Home</Link>
+          <Link href='/people'>People</Link>
           <Link href='/settings'>Settings</Link>
         </div>
         <div className='nav-footer'>

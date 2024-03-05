@@ -168,7 +168,26 @@ main {
   display: flex;
 }
 
-header .title {
+h1 {
+  font-size: 2.1rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.3rem;
+}
+h5 {
+  font-size: 1.1rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+header h1.title {
   padding-left: 20px;
 }
 
