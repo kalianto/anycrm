@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import { auth } from '../../auth';
 import AppHeader from '@/components/appHeader';
 import AppSideNav from '@/components/appSideNav';
 import { SessionProvider } from 'next-auth/react';
-import { CustomProvider } from 'rsuite';
-import SignInPage from '@/components/authComponents';
+import { CustomProvider, Container, Footer } from 'rsuite';
+import SignInPage, { SignOut } from '@/components/authComponents';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = Raleway({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'AnyCRM Portal',
@@ -26,22 +26,32 @@ export default async function RootLayout({
   if (!session) {
     return (
       <html lang='en'>
-      <body className={inter.className} suppressHydrationWarning={true}>
-        <SignInPage />
-      </body>
+        <body className={font.className} suppressHydrationWarning={true}>
+          <SignInPage />
+        </body>
       </html>
     );
   }
 
   return (
     <html lang='en'>
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={font.className} suppressHydrationWarning={true}>
         <SessionProvider session={session}>
           <AppHeader />
           <AppSideNav />
           <main>
             <CustomProvider theme='dark'>{children}</CustomProvider>
           </main>
+          {/* <div className='nav-footer'>
+            <div className='nav-footer-body'>
+            <SignOut />
+            </div>
+          </div> */}
+          <Container className='footer-bottom-left'>
+            <Footer>
+              <SignOut />
+            </Footer>
+          </Container>
         </SessionProvider>
       </body>
     </html>

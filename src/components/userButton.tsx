@@ -7,10 +7,10 @@ import Link from 'next/link';
 export default function UserButton() {
   const { data: session } = useSession();
 
-  // if (!session?.user) return null;
+  if (!session?.user) return null;
 
   const userImage: string =
-    session?.user.image ||
+    session?.user?.image ||
     'https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp';
 
   const userAvatar = () => {
@@ -24,15 +24,15 @@ export default function UserButton() {
         placement='bottomEnd'
         renderToggle={userAvatar}
       >
-        <Dropdown.Item panel style={{ padding: 10, width: 160 }}>
+        <Dropdown.Item panel style={{ padding: '15px 20px', width: 160 }}>
           <div className=''>
             <p>Signed in as</p>
-            <strong>{session?.user.name}</strong>
+            <strong>{session?.user?.name}</strong>
           </div>
         </Dropdown.Item>
         <Dropdown.Item icon={<FaUser />}>
           <Link href='/profile'>
-          <span className='title'>Profile</span>
+            <span className='title'>Profile</span>
           </Link>
         </Dropdown.Item>
       </Dropdown>

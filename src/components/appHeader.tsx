@@ -9,8 +9,6 @@ export default function AppHeader() {
   const pathname = usePathname();
   const headerTitle = getHeaderTitles(pathname);
 
-  // if (!session?.user) return null;
-
   return (
     <header>
       <div className='header-wrapper'>

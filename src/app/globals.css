@@ -1,6 +1,6 @@
 @import '~rsuite/dist/rsuite.min.css';
 
-/* :root {
+:root {
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -34,7 +34,7 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
-} */
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -76,7 +76,21 @@ body {
   overflow-x: hidden;
 }
 
-body {
+.bgdark-1 {
+  background-color: #0f131a;
+}
+
+.bgdark-2 {
+  background-color: #212529;
+}
+
+.bgdark-3 {
+  background-color: #000814;
+}
+
+
+body,
+.login {
   color: #a4a9b3;
   font-family: Arial, sans-serif;
   margin: 0;
@@ -90,7 +104,7 @@ a {
 }
 
 header {
-  background-color: #292d33;
+  background-color: #212529;
   color: #cbced4;
   padding: 15px;
   margin-left: 250px;
@@ -99,7 +113,7 @@ header {
 }
 
 nav {
-  background-color: #6a6f76;
+  background-color: #000814;
   color: #e9ebf0;
   width: 250px;
   height: 100%;
@@ -116,20 +130,36 @@ nav .nav-body {
   align-content: space-between;
 }
 
-nav a {
+nav a,
+nav .nav-menu-item a {
   display: block;
   padding: 15px;
   text-decoration: none;
   color: #f7f7fa;
-  border-bottom: 1px solid #777;
+  /* border-bottom: 1px solid #777; */
+  font-size: 14px;
+  border: 0px solid #000814;
 }
 
-nav a:hover {
-  background-color: #777;
+nav a:hover,
+nav a.active, 
+nav .nav-menu .nav-menu-item a:hover, 
+nav .nav-menu .nav-menu-item a:active, 
+nav .nav-menu .nav-menu-item a:focus {
+  border-radius: 0px;
+  background-color: #0f131a;
+  color: #0466c8;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+nav a:visited,
+nav a:focus {
+  text-decoration: none;
 }
 
 nav .nav-header {
-  height: 80px;
+  height: 86px;
   margin: 0 auto;
 }
 
@@ -142,13 +172,21 @@ nav .nav-subtitle {
   font-size: 0.8rem;
 }
 
-nav .nav-menu {
+/* nav .nav-menu {
   flex: 'flex-grow';
+  display: 'flex';
+  flex-direction: 'column';
+} */
+nav .nav-menu-item a {
+  padding: 10px 20px;
+  line-height: 32px;
 }
 
 nav .nav-footer {
   margin: 0;
-  
+  position: absolute;
+  bottom: 0;
+  left: 20px;
 }
 
 nav .nav-footer-body {
@@ -168,25 +206,6 @@ main {
   display: flex;
 }
 
-h1 {
-  font-size: 2.1rem;
-}
-h2 {
-  font-size: 1.8rem;
-}
-h3 {
-  font-size: 1.5rem;
-}
-h4 {
-  font-size: 1.3rem;
-}
-h5 {
-  font-size: 1.1rem;
-}
-h6 {
-  font-size: 1rem;
-}
-
 header h1.title {
   padding-left: 20px;
 }
@@ -201,21 +220,33 @@ header h1.title {
 h1 {
   font-size: 2rem;
 }
+
 h2 {
   font-size: 1.7rem;
 }
+
 h3 {
   font-size: 1.4rem;
 }
+
 h4 {
   font-size: 1.2rem;
 }
+
 h5 {
   font-size: 1rem;
 }
+
 h6 {
   font-size: 0.8rem;
 }
+
+.footer-bottom-left {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+}
+
 
 @media only screen and (max-width: 768px) {
   nav {
