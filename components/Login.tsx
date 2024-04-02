@@ -5,7 +5,7 @@ import loginImage from '@/images/14562384_5490518.svg';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { FaFacebookSquare , FaGoogle } from 'react-icons/fa';
-import { signIn, signOut } from '../auth';
+import { signIn } from '../auth';
 
 export function LoginPage() {
   return (
