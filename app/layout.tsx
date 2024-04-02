@@ -4,6 +4,7 @@ import './globals.css';
 import { auth } from '../auth';
 import { LoginPage } from '@/components/Login';
 import { SessionProvider } from 'next-auth/react';
+import MainLayout from '@/components/Main';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -11,7 +12,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'AnyCRM Portal',
+  title: 'AnyCRM - Anything Goes',
   description:
     'C stands for Customer, Client, Congregation, Church, Charity, Corporate, Company',
 };
@@ -44,7 +45,7 @@ export default async function RootLayout({
         suppressHydrationWarning={true}
       >
         <SessionProvider session={session}>
-          <main className=''>{children}</main>
+          <MainLayout>{children}</MainLayout>
         </SessionProvider>
       </body>
     </html>
