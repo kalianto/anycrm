@@ -2,7 +2,6 @@ import Sidebar from '@/components/Sidebar';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import UserMenu from '@/components/UserMenu';
 import SidebarDrawer from '@/components/SidebarDrawer';
-
 export default async function MainLayout({
   children,
 }: Readonly<{
@@ -11,7 +10,7 @@ export default async function MainLayout({
   return (
     <div className='grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]'>
       <Sidebar />
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-full h-screen min-h-screen'>
         <header className='flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6'>
           <SidebarDrawer />
           <Breadcrumbs />

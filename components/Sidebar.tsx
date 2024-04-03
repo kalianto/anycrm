@@ -32,8 +32,8 @@ export default function Sidebar() {
   const menuItemInactive = 'text-muted-foreground';
   const menuItemActive = 'bg-slate-200';
   return (
-    <div className='hidden border-r bg-muted/40 md:block'>
-      <div className='flex h-full max-h-screen flex-col gap-2'>
+    <div className='flex flex-1 hidden border-r bg-muted/40 md:block h-screen overflow-hidden'>
+      <div className='flex h-screen max-h-screen flex-col gap-2'>
         <div className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6'>
           <Link href='/' className='flex items-center gap-2 font-semibold'>
             <Image src={AnyCRMLogo} alt='AnyCRM - Anything Goes' className='' />
