@@ -1,8 +1,4 @@
 import { Button } from '@/components/ui/button';
-import Sidebar from '@/components/Sidebar';
-import Breadcrumbs from '@/components/Breadcrumbs';
-import UserMenu from '@/components/UserMenu';
-import SidebarDrawer from '@/components/SidebarDrawer';
 
 export default function Dashboard() {
   return (

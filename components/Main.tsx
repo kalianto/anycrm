@@ -2,6 +2,7 @@ import Sidebar from '@/components/Sidebar';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import UserMenu from '@/components/UserMenu';
 import SidebarDrawer from '@/components/SidebarDrawer';
+
 export default async function MainLayout({
   children,
 }: Readonly<{
@@ -16,7 +17,7 @@ export default async function MainLayout({
           <Breadcrumbs />
           <UserMenu />
         </header>
-        <main className='flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6'>
+        <main className='flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 overflow-y-auto'>
           {children}
         </main>
       </div>

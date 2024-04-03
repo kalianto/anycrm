@@ -8,13 +8,8 @@ export function Logout() {
         'use server';
         await signOut();
       }}
-      className='w-full'
     >
-      <Button
-        className='h-8 bg-red-400'
-        type='submit'
-        variant='ghost'
-      >
+      <Button type='submit' size='sm'>
         Log out
       </Button>
     </form>

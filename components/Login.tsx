@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import loginImage from '@/images/14562384_5490518.svg';
+import loginImage from '@/images/signin_illustration.svg';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FaFacebookSquare , FaGoogle } from 'react-icons/fa';
 import { signIn } from '../auth';
 
 export function LoginPage() {
@@ -28,10 +27,10 @@ export function LoginPage() {
                 }}
               >
                 <Button type='submit' className='w-full'>
-                  <FaGoogle /> <span className='pl-2'>Login with Google</span>
+                  Login with Google
                 </Button>
               </form>
-              <Separator className='my-2'  />
+              <Separator className='my-2' />
               <form
                 className='login-form'
                 action={async () => {
@@ -40,8 +39,7 @@ export function LoginPage() {
                 }}
               >
                 <Button variant='outline' className='w-full'>
-                  <FaFacebookSquare  />
-                  <span className='pl-2' >Login with Facebook</span>
+                  Login with Facebook
                 </Button>
               </form>
             </div>

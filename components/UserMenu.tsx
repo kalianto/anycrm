@@ -6,26 +6,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Logout } from './Logout';
+import { auth } from '@/auth';
 
-export default function UserMenu() {
+export default async function UserMenu() {
+  const session = await auth();
+  const userImage: string =
+    session?.user?.image ||
+    'https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp';
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='secondary' size='icon' className='rounded-full'>
           <Avatar>
-            <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={userImage} alt={session?.user?.name!} />
+            <AvatarFallback>{'...'}</AvatarFallback>
           </Avatar>
           <span className='sr-only'>Toggle user menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href='/settings'>Settings</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
