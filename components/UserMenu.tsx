@@ -6,11 +6,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Logout } from './Logout';
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth';
+import Link from 'next/link';
 
 export default async function UserMenu() {
   const session = await auth();
@@ -33,7 +33,9 @@ export default async function UserMenu() {
         <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href='/settings'>Settings</Link>
+          <Link href='/settings' className='w-full'>
+            Settings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />

@@ -1,7 +1,7 @@
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import './globals.css';
-import { auth } from '../auth';
+import { auth } from '../lib/auth';
 import { LoginPage } from '@/components/Login';
 import { SessionProvider } from 'next-auth/react';
 import MainLayout from '@/components/Main';
@@ -23,19 +23,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  console.log("🚀🚀🚀 ~ file: layout.tsx:25 ~ session:", session);
 
   if (!session) {
     return (
       <html lang='en' className={GeistSans.className}>
-      <body
-        className='bg-background text-foreground'
-        suppressHydrationWarning={true}
-      >
-        <LoginPage />
-      </body>
-    </html>
-    )
+        <body
+          className='bg-background text-foreground'
+          suppressHydrationWarning={true}
+        >
+          <LoginPage />
+        </body>
+      </html>
+    );
   }
 
   return (

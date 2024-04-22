@@ -68,7 +68,9 @@ export default function PeoplePage() {
     <>
       <div className='container mx-auto'>
         <PageHeading>People Page</PageHeading>
-        <DataTable columns={columns} data={defaultData} />
+        <div className='pt-4'>
+          <DataTable columns={columns} data={defaultData} />
+        </div>
       </div>
     </>
   );

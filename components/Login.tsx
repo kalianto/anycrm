@@ -3,8 +3,9 @@ import Link from 'next/link';
 import loginImage from '@/images/signin_illustration.svg';
 
 import { Button } from '@/components/ui/button';
+import { SubmitButton } from './SubmitButton';
 import { Separator } from '@/components/ui/separator';
-import { signIn } from '../auth';
+import { signIn } from '../lib/auth';
 
 export function LoginPage() {
   return (
@@ -20,27 +21,25 @@ export function LoginPage() {
             </div>
             <div className='grid gap-4'>
               <form
-                className='login-form'
                 action={async () => {
                   'use server';
                   await signIn('google');
                 }}
               >
-                <Button type='submit' className='w-full'>
+                <SubmitButton className='w-full'>
                   Login with Google
-                </Button>
+                </SubmitButton>
               </form>
               <Separator className='my-2' />
               <form
-                className='login-form'
                 action={async () => {
                   'use server';
                   await signIn('facebook');
                 }}
               >
-                <Button variant='outline' className='w-full'>
+                <SubmitButton variant='outline' className='w-full'>
                   Login with Facebook
-                </Button>
+                </SubmitButton>
               </form>
             </div>
             <div className='mt-4 text-center text-sm'>
