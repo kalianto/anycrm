@@ -2,6 +2,8 @@ import Sidebar from '@/components/Sidebar';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import UserMenu from '@/components/UserMenu';
 import SidebarDrawer from '@/components/SidebarDrawer';
+import { Toaster } from '@/components/ui/sonner';
+
 export default async function MainLayout({
   children,
 }: Readonly<{
@@ -20,6 +22,7 @@ export default async function MainLayout({
           {children}
         </main>
       </div>
+      <Toaster closeButton />
     </div>
   );
 }

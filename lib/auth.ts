@@ -27,7 +27,7 @@ export const config = {
   ],
   callbacks: {
     authorized({ request, auth }) {
-      console.log('🚀🚀🚀 ~ file: auth.ts:34 ~ auth:', auth);
+      // console.log('🚀🚀🚀 ~ file: auth.ts:34 ~ auth:', auth);
       const { pathname } = request.nextUrl;
       if (pathname === '/') return !!auth;
       return true;
@@ -53,7 +53,7 @@ export const config = {
             firstName: user?.name?.split(' ')[0]!,
             lastName: user?.name?.split(' ')[1]!,
             provider: account?.provider!,
-            status: 'inactive',
+            status: 'pending',
             email: user?.email!,
           },
         });

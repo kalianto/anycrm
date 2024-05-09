@@ -1,18 +1,12 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  Bell,
-  Home,
-  LineChart,
-
-  ShoppingCart,
-  User,
-  Users,
-} from 'lucide-react';
+import { Bell, Home, LineChart, ShoppingCart, User, Users } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { useSession } from 'next-auth/react';
 
 import {
   Card,
@@ -27,6 +21,9 @@ import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ status:', status);
+  console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ session:', session);
   const menuItemClass =
     'flex items-center gap-3 rounded-lg px-3 py-3 transition-all hover:text-primary';
   const menuItemInactive = 'text-muted-foreground';
@@ -76,15 +73,6 @@ export default function Sidebar() {
               Groups
             </Link>
             <Link
-              href='/people'
-              className={`${menuItemClass} ${
-                pathname === '/people' ? menuItemActive : menuItemInactive
-              }`}
-            >
-              <User className='h-4 w-4' />
-              People
-            </Link>
-            <Link
               href='/analytics'
               className={`${menuItemClass} ${
                 pathname === '/analytics' ? menuItemActive : menuItemInactive
@@ -92,6 +80,17 @@ export default function Sidebar() {
             >
               <LineChart className='h-4 w-4' />
               Analytics
+            </Link>
+            <Separator className='my-4' />
+            <div className='font-semibold'>Administration</div>
+            <Link
+              href='/users'
+              className={`${menuItemClass} ${
+                pathname === '/people' ? menuItemActive : menuItemInactive
+              }`}
+            >
+              <User className='h-4 w-4' />
+              Users
             </Link>
           </nav>
         </div>

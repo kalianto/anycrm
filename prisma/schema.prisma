@@ -8,19 +8,99 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  firstName String    @db.VarChar(255)
-  lastName  String    @db.VarChar(255)
-  email     String    @unique(map: "email") @db.VarChar(255)
-  avatar    String?   @db.VarChar(255)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime?
-  status    String    @db.VarChar(255)
-  provider  String    @db.VarChar(255)
-  city      String?   @db.VarChar(255)
-  street    String?   @db.VarChar(255)
-  postcode  String?   @db.VarChar(255)
-  phone     String?   @db.VarChar(255)
+  id                      Int                      @id @default(autoincrement())
+  firstName               String                   @db.VarChar(255)
+  lastName                String                   @db.VarChar(255)
+  email                   String                   @unique(map: "email") @db.VarChar(255)
+  avatar                  String?                  @db.VarChar(255)
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime?
+  status                  String                   @db.VarChar(255)
+  provider                String                   @db.VarChar(255)
+  city                    String?                  @db.VarChar(255)
+  street                  String?                  @db.VarChar(255)
+  postcode                String?                  @db.VarChar(255)
+  phone                   String?                  @db.VarChar(255)
+  groupsCreated           Group[]
+  groupsUserIn            GroupUser[]              @relation(name: "groupsUserIn")
+  groupsUserCreated       GroupUser[]              @relation(name: "groupsUserCreated")
+  groupsPermissionCreated GroupPermission[]
+  groupUserHistory        GroupUserHistory[]       @relation(name: "groupUserHistory")
+  groupPermissionHistory  GroupPermissionHistory[] @relation(name: "groupPermissionHistory")
 
-  @@map("user")
+  @@map("users")
+}
+
+model Group {
+  id                Int               @id @default(autoincrement())
+  title             String            @db.VarChar(255)
+  description       String?           @db.VarChar(1024)
+  createdAt         DateTime          @default(now())
+  createdById       Int
+  createdBy         User              @relation(fields: [createdById], references: [id])
+  groupsPermissions GroupPermission[]
+  usersInGroup      GroupUser[]
+
+  @@map("groups")
+}
+
+model Permission {
+  id                 Int               @id @default(autoincrement())
+  title              String            @db.VarChar(255)
+  description        String?           @db.VarChar(1024)
+  permission         String            @db.VarChar(255)
+  availableRules     Json
+  createdAt          DateTime          @default(now())
+  groupsInPermission GroupPermission[]
+
+  @@map("permissions")
+}
+
+model GroupPermission {
+  groupId      Int
+  permissionId Int
+  priority     Int
+  createdAt    DateTime   @default(now())
+  permissions  Permission @relation(fields: [permissionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  groups       Group      @relation(fields: [groupId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdBy    User       @relation(fields: [createdById], references: [id])
+  createdById  Int
+
+  @@unique([groupId, permissionId], map: "group_id_permission_id_unique")
+  @@map("group_permissions")
+}
+
+model GroupUser {
+  groupId     Int
+  userId      Int
+  createdAt   DateTime @default(now())
+  users       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, name: "groupsUserIn")
+  groups      Group    @relation(fields: [groupId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  createdById Int
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: NoAction, onUpdate: NoAction, name: "groupsUserCreated")
+
+  @@unique([groupId, userId], map: "group_id_user_id_unique")
+  @@map("group_users")
+}
+
+model GroupUserHistory {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  action    String   @db.VarChar(255)
+  changes   Json
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], name: "groupUserHistory")
+
+  @@map("group_user_history")
+}
+
+model GroupPermissionHistory {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  action    String   @db.VarChar(255)
+  changes   Json
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], name: "groupPermissionHistory")
+
+  @@map("group_permission_history")
 }
