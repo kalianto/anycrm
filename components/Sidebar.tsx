@@ -27,7 +27,7 @@ export default function Sidebar() {
   const menuItemClass =
     'flex items-center gap-3 rounded-lg px-3 py-3 transition-all hover:text-primary';
   const menuItemInactive = 'text-muted-foreground';
-  const menuItemActive = 'bg-slate-200';
+  const menuItemActive = 'bg-slate-300';
   return (
     <div className='flex flex-1 hidden border-r bg-muted/40 md:block h-screen overflow-hidden'>
       <div className='flex h-screen max-h-screen flex-col gap-2'>
@@ -64,15 +64,6 @@ export default function Sidebar() {
               </Badge>
             </Link>
             <Link
-              href='/groups'
-              className={`${menuItemClass} ${
-                pathname === '/groups' ? menuItemActive : menuItemInactive
-              }`}
-            >
-              <Users className='h-4 w-4' />
-              Groups
-            </Link>
-            <Link
               href='/analytics'
               className={`${menuItemClass} ${
                 pathname === '/analytics' ? menuItemActive : menuItemInactive
@@ -82,15 +73,24 @@ export default function Sidebar() {
               Analytics
             </Link>
             <Separator className='my-4' />
-            <div className='font-semibold'>Administration</div>
+            <div className='font-semibold pb-2'>Administration</div>
             <Link
               href='/users'
               className={`${menuItemClass} ${
-                pathname === '/people' ? menuItemActive : menuItemInactive
+                pathname === '/users' ? menuItemActive : menuItemInactive
               }`}
             >
               <User className='h-4 w-4' />
               Users
+            </Link>
+            <Link
+              href='/groups'
+              className={`${menuItemClass} ${
+                pathname === '/groups' ? menuItemActive : menuItemInactive
+              }`}
+            >
+              <Users className='h-4 w-4' />
+              Groups
             </Link>
           </nav>
         </div>

@@ -1,5 +1,7 @@
 import PageHeading from '@/components/PageHeading';
 import PeopleView from './view';
+import DetailsView from './details';
+import UsersWidgetsView from './widgets';
 
 // function mockUsers(length: number): MockUsers[] {
 //   const createRowData = (rowIndex: number): MockUsers => {
@@ -54,11 +56,24 @@ import PeopleView from './view';
 
 export default function PeoplePage() {
   return (
-    <>
-      <div className='container mx-auto'>
-        <PageHeading>People Page</PageHeading>
-        <PeopleView />
+    <div className='flex flex-1 gap-6 m-4'>
+      <div className='flex-auto w-2/3'>
+        <div className='flex-row'>
+          <PageHeading>Users</PageHeading>
+          <div className='py-4'>
+            <UsersWidgetsView />
+          </div>
+          <div className='py-4'>
+            <PeopleView />
+          </div>
+        </div>
       </div>
-    </>
+      <div className='flex w-1/3'>
+        <div className='flex-row'>
+          <PageHeading>Details</PageHeading>
+          <DetailsView />
+        </div>
+      </div>
+    </div>
   );
 }
