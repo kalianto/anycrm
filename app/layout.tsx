@@ -23,6 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  console.log('🚀🚀🚀 ~ file: layout.tsx:26 ~ session:', session);
 
   if (!session) {
     return (

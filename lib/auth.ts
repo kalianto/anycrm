@@ -53,24 +53,14 @@ export const config = {
             firstName: user?.name?.split(' ')[0]!,
             lastName: user?.name?.split(' ')[1]!,
             provider: account?.provider!,
-            status: 'pending',
+            status: 'inactive',
             email: user?.email!,
           },
         });
         console.log('🚀🚀🚀 ~ file: auth.ts:62 ~ newUser:', existingUser);
       }
 
-      // TODO: check if user status is inactive,
-      // then we send email to the user to verify
-      // if (existingUser && existingUser.status === 'inactive') {
-      //   console.log(
-      //     '🚀🚀🚀 ~ file: auth.ts:69 ~ existingUser.status:',
-      //     existingUser.status
-      //   );
-      //   return false;
-      // }
-
-      return true;
+      return existingUser.status === 'active';
     },
   },
   pages: {

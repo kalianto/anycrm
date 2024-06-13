@@ -18,7 +18,7 @@ import { Separator } from '@/components/ui/separator';
 
 import { Copy, CreditCard, MoreVertical, Truck } from 'lucide-react';
 
-const DetailsView = () => {
+const UserDetailsView = () => {
   return (
     <div className='my-4'>
       <Card className='overflow-hidden' x-chunk='dashboard-05-chunk-4'>
@@ -160,4 +160,4 @@ const DetailsView = () => {
   );
 };
 
-export default DetailsView;
+export default UserDetailsView;

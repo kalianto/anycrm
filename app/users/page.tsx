@@ -1,6 +1,6 @@
 import PageHeading from '@/components/PageHeading';
 import PeopleView from './view';
-import DetailsView from './details';
+import UserDetailsView from './details';
 import UsersWidgetsView from './widgets';
 
 // function mockUsers(length: number): MockUsers[] {
@@ -56,7 +56,7 @@ import UsersWidgetsView from './widgets';
 
 export default function PeoplePage() {
   return (
-    <div className='flex flex-1 gap-6 m-4'>
+    <div className='flex flex-1 gap-8 m-8'>
       <div className='flex-auto w-2/3'>
         <div className='flex-row'>
           <PageHeading>Users</PageHeading>
@@ -71,7 +71,7 @@ export default function PeoplePage() {
       <div className='flex w-1/3'>
         <div className='flex-row'>
           <PageHeading>Details</PageHeading>
-          <DetailsView />
+          <UserDetailsView />
         </div>
       </div>
     </div>

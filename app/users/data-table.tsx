@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Separator } from '@/components/ui/separator';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -72,6 +73,11 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      <Separator className='my-4' />
+      <div className='flex-1 text-sm text-muted-foreground'>
+        {table.getFilteredSelectedRowModel().rows.length} of{' '}
+        {table.getFilteredRowModel().rows.length} row(s) selected.
+      </div>
     </div>
   );
 }

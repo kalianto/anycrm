@@ -1,13 +1,19 @@
+import { cache } from 'react';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export const getUsers = async () => {
+export const getUsers = cache(async () => {
   const session = await auth();
-  console.log('🚀🚀🚀 ~ file: get-people.ts:3 ~ session:', session);
+  // console.log('🚀🚀🚀 ~ file: get-users.ts:3 ~ session:', session);
   const data = await prisma.user.findMany({
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: [
+      {
+        firstName: 'asc',
+      },
+      {
+        lastName: 'asc',
+      },
+    ],
   });
   return data;
-};
+});

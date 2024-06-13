@@ -12,7 +12,6 @@ import {
 
 const PeopleView = async () => {
   const users = await getUsers();
-  // console.log('🚀🚀🚀 ~ file: view.tsx:7 ~ users:', users);
 
   return (
     <Card>

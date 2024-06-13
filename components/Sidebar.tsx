@@ -22,8 +22,8 @@ import { usePathname } from 'next/navigation';
 export default function Sidebar() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ status:', status);
-  console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ session:', session);
+  // console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ status:', status);
+  // console.log('🚀🚀🚀 ~ file: Sidebar.tsx:25 ~ session:', session);
   const menuItemClass =
     'flex items-center gap-3 rounded-lg px-3 py-3 transition-all hover:text-primary';
   const menuItemInactive = 'text-muted-foreground';

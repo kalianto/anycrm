@@ -14,6 +14,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
 import { toast } from 'sonner';
+import { activateUser } from '@/actions/users/activate';
+import { useState } from 'react';
 
 // export type MockUsers = {
 //   id: number;
@@ -141,16 +143,18 @@ export const columns: ColumnDef<User>[] = [
             <DropdownMenuItem>View details</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() =>
-                toast.info('Account Activated', {
-                  action: {
-                    label: 'Undo',
-                    onClick: () => console.log('Undo'),
-                  },
-                })
-              }
+              onClick={async () => {
+                const updateUser = await activateUser(user.id);
+                console.log(
+                  '🚀🚀🚀 ~ file: columns.tsx:148 ~ updateUser:',
+                  updateUser
+                );
+                const statusText =
+                  user.status === 'active' ? 'deactivated' : 'activated';
+                toast.info(`Account ${statusText}`);
+              }}
             >
-              Activate
+              {user.status === 'active' ? 'Deactivate' : 'Activate'}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

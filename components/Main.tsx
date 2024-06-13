@@ -22,7 +22,7 @@ export default async function MainLayout({
           {children}
         </main>
       </div>
-      <Toaster closeButton />
+      <Toaster closeButton position='top-right' />
     </div>
   );
 }
