@@ -59,10 +59,10 @@ export default function PeoplePage() {
     <div className='flex flex-1 gap-8 m-8'>
       <div className='flex-auto w-2/3'>
         <div className='flex-row'>
-          <PageHeading>Users</PageHeading>
-          <div className='py-4'>
+          {/* <PageHeading>Users</PageHeading> */}
+          {/* <div className='py-4'>
             <UsersWidgetsView />
-          </div>
+          </div> */}
           <div className='py-4'>
             <PeopleView />
           </div>
@@ -70,7 +70,7 @@ export default function PeoplePage() {
       </div>
       <div className='flex w-1/3'>
         <div className='flex-row'>
-          <PageHeading>Details</PageHeading>
+          {/* <PageHeading>Details</PageHeading> */}
           <UserDetailsView />
         </div>
       </div>
