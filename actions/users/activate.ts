@@ -1,6 +1,5 @@
 'use server';
 import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
 import { auth } from '@/lib/auth';
 
 export const activateUser = async (userId: number) => {
@@ -27,6 +26,5 @@ export const activateUser = async (userId: number) => {
     },
   });
   console.log('🚀🚀🚀 ~ file: activate.ts:5 ~ userId:', userId, session);
-  revalidatePath('/users');
   return updateUser;
 };

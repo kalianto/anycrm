@@ -1,5 +1,4 @@
 import { columns } from './columns';
-import { User } from '@prisma/client';
 import { DataTable } from './data-table';
 import { getUsers } from '@/actions/users/get-users';
 import {
