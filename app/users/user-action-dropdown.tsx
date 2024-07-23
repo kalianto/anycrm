@@ -1,3 +1,5 @@
+'use client';
+import { useContext } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +15,10 @@ import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import { activateUser } from '@/actions/users/activate';
 import { useRouter } from 'next/navigation';
+import {
+  SelectedUserContext,
+  SelectedUserType,
+} from '@/lib/client/providers/selectedUser';
 
 interface IUserActionDropdown {
   user: User;
@@ -20,6 +26,7 @@ interface IUserActionDropdown {
 
 export const UserActionDropdown = ({ user }: IUserActionDropdown) => {
   const router = useRouter();
+  const { setUserId } = useContext(SelectedUserContext) as SelectedUserType;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,7 +48,9 @@ export const UserActionDropdown = ({ user }: IUserActionDropdown) => {
         <DropdownMenuItem>
           <Link href={`/users/${user.id}`}>Edit</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>View details</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setUserId(user.id)}>
+          View details
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {

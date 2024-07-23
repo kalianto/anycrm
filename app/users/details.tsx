@@ -1,4 +1,5 @@
 'use client';
+import { useContext } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -16,17 +17,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-
 import { Copy, CreditCard, MoreVertical, Truck } from 'lucide-react';
+import {
+  SelectedUserContext,
+  SelectedUserType,
+} from '@/lib/client/providers/selectedUser';
 
 const UserDetailsView = () => {
+  const { userId } = useContext(SelectedUserContext) as SelectedUserType;
   return (
     <div className='my-4'>
       <Card className='overflow-hidden' x-chunk='dashboard-05-chunk-4'>
         <CardHeader className='flex flex-row items-start bg-muted/50'>
           <div className='grid gap-0.5'>
             <CardTitle className='group flex items-center gap-2 text-lg'>
-              Order Oe31b70H
+              Order Oe31b70H {userId}
               <Button
                 size='icon'
                 variant='outline'
