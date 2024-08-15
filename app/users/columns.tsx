@@ -1,6 +1,7 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
+import Link from 'next/link';
 import { User } from '@prisma/client';
 import { toCapitalise } from '@/lib/utils';
 import { UserActionDropdown } from './user-action-dropdown';
@@ -32,29 +33,36 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     header: 'Name',
-    cell: ({ row }) => {
-      return `${row.original?.firstName} ${row.original?.lastName}`;
+    cell: ({ row, table }) => {
+      // return `${row.original?.firstName} ${row.original?.lastName}`;
+      const { onSelectUser } = table.options.meta as any;
+      return (
+        <Link
+          href='#'
+          onClick={() => onSelectUser(row.original.id)}
+        >{`${row.original?.firstName} ${row.original?.lastName}`}</Link>
+      );
     },
   },
   {
     accessorKey: 'email',
     header: 'Email',
   },
-  {
-    accessorKey: 'provider',
-    header: 'Provider',
-    cell: ({ row }) => {
-      return toCapitalise(row.original.provider);
-    },
-  },
-  {
-    accessorKey: 'phone',
-    header: 'Phone',
-  },
-  {
-    accessorKey: 'city',
-    header: 'City/Suburb',
-  },
+  // {
+  //   accessorKey: 'provider',
+  //   header: 'Provider',
+  //   cell: ({ row }) => {
+  //     return toCapitalise(row.original.provider);
+  //   },
+  // },
+  // {
+  //   accessorKey: 'phone',
+  //   header: 'Phone',
+  // },
+  // {
+  //   accessorKey: 'city',
+  //   header: 'City/Suburb',
+  // },
   {
     accessorKey: 'status',
     header: 'Status',

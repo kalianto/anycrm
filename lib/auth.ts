@@ -36,7 +36,7 @@ export const config = {
       // add more properties to the session object if we need to
       return session;
     },
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile }) {
       // check if user exist in our database
       let existingUser = await prisma.user.findUnique({
         where: {
@@ -44,10 +44,13 @@ export const config = {
         },
       });
 
+      // TODO: allow a settings at the admin level to enable this
+      const autoRegister = true;
+
       // if user doesn't exist, we add it but set it to pending
       // then we send email to verify the user email
       // once verify, we will set the account to active
-      if (!existingUser) {
+      if (!existingUser && autoRegister) {
         existingUser = await prisma.user.create({
           data: {
             firstName: user?.name?.split(' ')[0]!,
@@ -60,11 +63,19 @@ export const config = {
         console.log('🚀🚀🚀 ~ file: auth.ts:62 ~ newUser:', existingUser);
       }
 
-      return existingUser.status === 'active';
+      return existingUser?.status === 'active';
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+
+      return baseUrl;
     },
   },
   pages: {
     signIn: '/',
+    signOut: '/',
+    error: '/',
   },
 } satisfies NextAuthConfig;
 
