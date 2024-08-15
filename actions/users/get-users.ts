@@ -1,10 +1,11 @@
-import { cache } from 'react';
+'use server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export const getUsers = cache(async () => {
+export const getUsers = async () => {
   const session = await auth();
-  // console.log('🚀🚀🚀 ~ file: get-users.ts:3 ~ session:', session);
+
+  // TODO: RBAC here
   const data = await prisma.user.findMany({
     orderBy: [
       {
@@ -16,4 +17,4 @@ export const getUsers = cache(async () => {
     ],
   });
   return data;
-});
+};

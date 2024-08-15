@@ -1,4 +1,5 @@
 'use client';
+import { useContext } from 'react';
 import {
   ColumnDef,
   flexRender,
@@ -14,6 +15,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
+import {
+  SelectedUserContext,
+  SelectedUserType,
+} from '@/lib/client/providers/selectedUser';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -23,10 +28,18 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const { userId, setUserId } = useContext(
+    SelectedUserContext
+  ) as SelectedUserType;
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      userId,
+      onSelectUser: (id: number) => setUserId(id),
+    },
   });
 
   return (

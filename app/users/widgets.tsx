@@ -3,7 +3,7 @@ import { Activity, DollarSign, CreditCard, Users } from 'lucide-react';
 const UsersWidgetsView = () => {
   return (
     <div className='grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4'>
-      <Card x-chunk='dashboard-01-chunk-0'>
+      <Card>
         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <CardTitle className='text-sm font-medium'>Total Revenue</CardTitle>
           <DollarSign className='h-4 w-4 text-muted-foreground' />
@@ -15,7 +15,7 @@ const UsersWidgetsView = () => {
           </p>
         </CardContent>
       </Card>
-      <Card x-chunk='dashboard-01-chunk-1'>
+      <Card>
         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <CardTitle className='text-sm font-medium'>Subscriptions</CardTitle>
           <Users className='h-4 w-4 text-muted-foreground' />
@@ -27,7 +27,7 @@ const UsersWidgetsView = () => {
           </p>
         </CardContent>
       </Card>
-      <Card x-chunk='dashboard-01-chunk-2'>
+      <Card>
         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <CardTitle className='text-sm font-medium'>Sales</CardTitle>
           <CreditCard className='h-4 w-4 text-muted-foreground' />
@@ -37,7 +37,7 @@ const UsersWidgetsView = () => {
           <p className='text-xs text-muted-foreground'>+19% from last month</p>
         </CardContent>
       </Card>
-      <Card x-chunk='dashboard-01-chunk-3'>
+      <Card>
         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
           <CardTitle className='text-sm font-medium'>Active Now</CardTitle>
           <Activity className='h-4 w-4 text-muted-foreground' />

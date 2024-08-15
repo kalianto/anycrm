@@ -20,7 +20,7 @@ export default function UsersPage() {
           </div>
         </div>
         <div className='flex w-1/3'>
-          <div className='flex-row'>
+          <div className='flex-row w-full'>
             {/* <PageHeading>Details</PageHeading> */}
             <UserDetailsView />
           </div>
