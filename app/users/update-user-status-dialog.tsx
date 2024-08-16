@@ -7,13 +7,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { activateUser } from '@/actions/users/activate';
-import { ActivityIcon } from 'lucide-react';
 
 type UpdateUserStatusDialogProps = {
   id: number;
@@ -33,29 +30,23 @@ export const UpdateUserStatusDialog = ({
   const router = useRouter();
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      {/* <AlertDialogTrigger asChild>
-        <Button variant='link' onClick={() => onOpenChange(true)}>
-          <ActivityIcon className='mr-2 h-4 w-4' />
-          <span>{statusText}</span>
-        </Button>
-      </AlertDialogTrigger> */}
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>
+            {`Are you sure you wish to `}
+            <strong>{statusText}</strong>
+            {` this user?`}
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            {`Please confirm your action by clicking on "Continue" button.`}
+            {`Please confirm your action by clicking the "Continue" button.`}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className='mt-4'>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={async () => {
               try {
                 const updateUser = await activateUser(id);
-                console.log(
-                  '🚀🚀🚀 ~ file: columns.tsx:148 ~ updateUser:',
-                  updateUser
-                );
                 const statusText =
                   status === 'active' ? 'deactivated' : 'activated';
                 toast.success(`User status has been "${statusText}"`, {
