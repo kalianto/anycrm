@@ -23,6 +23,7 @@ const FormSchema = z.object({
   street: z.string(),
   city: z.string(),
   postcode: z.string(),
+  phone: z.string(),
 });
 
 export const EditUserForm = ({
@@ -42,6 +43,7 @@ export const EditUserForm = ({
       street: preloadedData?.street || '',
       city: preloadedData?.city || '',
       postcode: preloadedData?.postcode || '',
+      phone: preloadedData?.phone || '',
     },
   });
 
@@ -59,6 +61,7 @@ export const EditUserForm = ({
           street: data.street,
           city: data.city,
           postcode: data.postcode,
+          phone: data.phone,
         },
       });
       toast.success(`User details has been updated successfully`);
@@ -148,6 +151,27 @@ export const EditUserForm = ({
                 <FormControl>
                   <Input placeholder='your postcode' {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className='grid gap-4 grid-cols-2'>
+          <FormField
+            control={form.control}
+            name='phone'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone or Mobile</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='phone or mobile number with international code'
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Include the international code eg. +61 431 234 567
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
