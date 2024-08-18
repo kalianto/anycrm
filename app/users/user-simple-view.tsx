@@ -93,9 +93,11 @@ const UserSimpleView = ({ userId }: { userId: number }) => {
             <div className='grid gap-3'>
               <div className='font-semibold'>Address Information</div>
               <address className='grid gap-0.5 not-italic text-muted-foreground'>
-                <span>Liam Johnson</span>
-                <span>1234 Main St.</span>
-                <span>Anytown, CA 12345</span>
+                <span>{user.street}</span>
+                <span>
+                  {user.city} {user.postcode ? `, ${user.postcode}` : ''}
+                </span>
+                <span></span>
               </address>
             </div>
           </div>
