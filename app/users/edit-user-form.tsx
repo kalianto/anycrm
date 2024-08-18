@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { User } from '@prisma/client';
-import { useRouter } from 'next/navigation';
 import { updateUser } from '@/actions/users/update-user';
 import {
   Form,
@@ -35,7 +34,6 @@ export const EditUserForm = ({
   preloadedData: User | null;
   onOpenChange: (_open: boolean) => void;
 }) => {
-  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -64,7 +62,6 @@ export const EditUserForm = ({
         },
       });
       toast.success(`User details has been updated successfully`);
-      router.refresh();
       onOpenChange(false);
     } catch (err) {
       toast.error('Something went wrong', {

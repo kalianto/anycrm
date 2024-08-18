@@ -23,7 +23,6 @@ const UserSimpleView = ({ userId }: { userId: number }) => {
   };
 
   useEffect(() => {
-    console.log('🚀🚀🚀 ~ file: user-simple-view.tsx:20 ~ user:', userId);
     getUserDetails(userId);
   }, [userId]);
 
