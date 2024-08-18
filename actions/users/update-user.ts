@@ -10,6 +10,7 @@ interface UpdateUserOptions {
     street: string;
     city: string;
     postcode: string;
+    phone: string;
   };
 }
 
@@ -39,6 +40,7 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
       street: userDetails.street,
       city: userDetails.city,
       postcode: userDetails.postcode,
+      phone: userDetails.phone,
       updatedAt: new Date(),
     },
   });
