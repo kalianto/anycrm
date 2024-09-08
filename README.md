@@ -31,6 +31,9 @@ No demo yet, but will be available in the future.
 1. Clone the repository
 
 2. Rename `.env.local.example` to `.env.local` and update the following:
+1. Clone the repository
+
+2. Rename `.env.local.example` to `.env.local` and update the following:
 
    ```
    DATABASE_URL=

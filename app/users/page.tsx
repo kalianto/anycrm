@@ -12,6 +12,12 @@ export default function UsersPage() {
           <div className='flex-row'>
             {/* <PageHeading>Users</PageHeading> */}
             {/* <div className='py-4'>
+    <SelectedUserProvider>
+      <div className='flex flex-1 gap-8 m-8'>
+        <div className='flex-auto w-2/3'>
+          <div className='flex-row'>
+            {/* <PageHeading>Users</PageHeading> */}
+            {/* <div className='py-4'>
             <UsersWidgetsView />
             </div> */}
             <div className='py-4'>
