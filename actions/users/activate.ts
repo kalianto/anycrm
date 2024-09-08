@@ -23,8 +23,9 @@ export const activateUser = async (userId: number) => {
     },
     data: {
       status,
+      updatedAt: new Date(),
     },
   });
-  console.log('🚀🚀🚀 ~ file: activate.ts:5 ~ userId:', userId, session);
+
   return updateUser;
 };

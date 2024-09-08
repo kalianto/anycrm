@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import loginImage from '@/images/signin_illustration.svg';
 
-import { Button } from '@/components/ui/button';
 import { SubmitButton } from './SubmitButton';
 import { Separator } from '@/components/ui/separator';
 import { signIn } from '../lib/auth';
+import { LoginErrorPage } from './LoginError';
 
 export function LoginPage() {
   return (
@@ -48,6 +48,7 @@ export function LoginPage() {
                 Sign up
               </Link>
             </div>
+            <LoginErrorPage />
           </div>
         </div>
         <div className='hidden lg:block'>

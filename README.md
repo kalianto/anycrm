@@ -31,6 +31,9 @@ No demo yet, but will be available in the future.
 1. Clone the repository
 
 2. Rename `.env.local.example` to `.env.local` and update the following:
+1. Clone the repository
+
+2. Rename `.env.local.example` to `.env.local` and update the following:
 
    ```
    DATABASE_URL=
@@ -53,7 +56,19 @@ No demo yet, but will be available in the future.
    AUTH_SECRET
    ```
 
-3. You can now run the Next.js local development server:
+3. Database migration and seeds
+   
+   Of course the migration file and schema can be found in the file `schema.prisma`, which is usually stored in the prisma  folder `prisma/schema.prisma`
+
+   Create a new database and update the `DATABASE_URL` to use your new database
+
+   There is no need to baseline your database or create initial migration file as recommended by Prisma on this page [Baseline your database](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/baseline-your-database-typescript-mysql), well, because it's a new database.
+   
+   ```
+   npx prisma migrate dev
+   ```
+
+4. You can now run the Next.js local development server:
 
    ```bash
    npm run dev
