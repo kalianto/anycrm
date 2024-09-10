@@ -10,7 +10,7 @@ import UserSimpleView from './user-simple-view';
 import {
   SelectedUserContext,
   SelectedUserType,
-} from '@/lib/client/providers/selectedUser';
+} from '@/lib/client/providers/selected-user';
 import { match } from 'ts-pattern';
 
 const UserDetailsView = () => {

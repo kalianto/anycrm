@@ -9,7 +9,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 
-const PeopleView = async () => {
+const UserListsView = async () => {
   const users = await getUsers();
 
   return (
@@ -27,4 +27,4 @@ const PeopleView = async () => {
   );
 };
 
-export default PeopleView;
+export default UserListsView;

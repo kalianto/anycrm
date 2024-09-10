@@ -18,7 +18,7 @@ import { Separator } from '@/components/ui/separator';
 import {
   SelectedUserContext,
   SelectedUserType,
-} from '@/lib/client/providers/selectedUser';
+} from '@/lib/client/providers/selected-user';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];

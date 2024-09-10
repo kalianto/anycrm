@@ -1,8 +1,8 @@
-import PageHeading from '@/components/PageHeading';
-import UserView from './view';
+// import PageHeading from '@/components/PageHeading';
+import UserListsView from './user-lists-view';
 import UserDetailsView from './details';
-import UsersWidgetsView from './widgets';
-import SelectedUserProvider from '@/lib/client/providers/selectedUser';
+// import UsersWidgetsView from './widgets';
+import SelectedUserProvider from '@/lib/client/providers/selected-user';
 
 export default function UsersPage() {
   return (
@@ -21,7 +21,7 @@ export default function UsersPage() {
             <UsersWidgetsView />
             </div> */}
             <div className='py-4'>
-              <UserView />
+              <UserListsView />
             </div>
           </div>
         </div>
