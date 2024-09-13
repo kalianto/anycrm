@@ -3,7 +3,6 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 import { User } from '@prisma/client';
-import { toCapitalise } from '@/lib/utils';
 import { UserActionDropdown } from './user-action-dropdown';
 
 export const columns: ColumnDef<User>[] = [
