@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { GroupSheet } from './group-sheet';
 
 const GroupListView = async () => {
   const groups = await getGroups();
@@ -15,8 +16,17 @@ const GroupListView = async () => {
   return (
     <Card>
       <CardHeader className='px-7'>
-        <CardTitle>List of Groups</CardTitle>
-        <CardDescription>All groups with permission and users</CardDescription>
+        <div className='flex flex-row'>
+          <div className='grow'>
+            <CardTitle>List of Groups</CardTitle>
+            <CardDescription>
+              All groups with permission and users
+            </CardDescription>
+          </div>
+          <div className='flex-none w-24 '>
+            <GroupSheet />
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <DataTable columns={columns} data={groups} />
