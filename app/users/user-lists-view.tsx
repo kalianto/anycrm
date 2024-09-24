@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const UserListsView = async () => {
   const users = await getUsers();
@@ -15,10 +16,17 @@ const UserListsView = async () => {
   return (
     <Card>
       <CardHeader className='px-7'>
-        <CardTitle>List of Users</CardTitle>
-        <CardDescription>
-          All users who have access to the system
-        </CardDescription>
+        <div className='flex flex-row'>
+          <div className='grow'>
+            <CardTitle>List of Users</CardTitle>
+            <CardDescription>
+              All users who have access to the system
+            </CardDescription>
+          </div>
+          <div className='flex-none w-24'>
+            <Button className='float-right'>Add New</Button>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
         <DataTable columns={columns} data={users} />

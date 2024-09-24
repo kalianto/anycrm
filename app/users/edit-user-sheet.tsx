@@ -29,7 +29,10 @@ export const EditUserSheet = ({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       {/* overwrite the classname of sm:max-w-sm to set the width of the sheet */}
-      <SheetContent className='sm:max-w-4xl'>
+      <SheetContent
+        className='lg:max-w-3xl md:max-w-2xl sm:max-w-sm mx-auto mt-12'
+        side='top'
+      >
         <SheetHeader>
           <SheetTitle>Edit User Details</SheetTitle>
           <SheetDescription>
