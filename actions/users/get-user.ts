@@ -14,3 +14,16 @@ export const getUser = async (id: number) => {
 
   return data;
 };
+
+export const getUserByEmail = async (email: string) => {
+  const session = await auth();
+
+  // TODO: RBAC here
+  const data = await prisma.user.findFirstOrThrow({
+    where: {
+      email,
+    },
+  });
+
+  return data;
+};

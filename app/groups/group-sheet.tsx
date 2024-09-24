@@ -35,7 +35,7 @@ export const GroupSheet = () => {
           </SheetDescription>
         </SheetHeader>
         <Separator className='my-4' />
-        <CreateGroupForm />
+        <CreateGroupForm onOpenChange={setSheetOpen} />
       </SheetContent>
     </Sheet>
   );

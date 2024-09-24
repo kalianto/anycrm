@@ -17,13 +17,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
 import { createGroup } from '@/actions/groups/create-group';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
   title: z.string().min(2).max(255),
   description: z.string().min(2).max(1024),
 });
 
-export const CreateGroupForm = () => {
+export const CreateGroupForm = ({
+  onOpenChange,
+}: {
+  onOpenChange: (_open: boolean) => void;
+}) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -35,9 +41,23 @@ export const CreateGroupForm = () => {
   async function submitForm(data: z.infer<typeof FormSchema>) {
     try {
       const response = await createGroup(data);
-      toast.success(`New Group has been created successfully`);
-      // onOpenChange(false);
-    } catch (err) {}
+      toast.success(`New Group has been created successfully`, {
+        action: {
+          label: 'Close',
+          onClick: () => {},
+        },
+      });
+      onOpenChange(false);
+      router.refresh();
+    } catch (err) {
+      toast.error('Something went wrong', {
+        description: 'An error occurred while creating a group.',
+        action: {
+          label: 'Close',
+          onClick: () => {},
+        },
+      });
+    }
   }
 
   return (
