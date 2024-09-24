@@ -30,6 +30,8 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
     return { error: 'User Not found' };
   }
 
+  // TODO: Implement RBAC here
+
   const updateUser = await prisma.user.update({
     where: {
       id: userId,

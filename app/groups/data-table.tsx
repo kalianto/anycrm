@@ -16,9 +16,9 @@ import {
 } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
 import {
-  SelectedUserContext,
-  SelectedUserType,
-} from '@/lib/client/providers/selected-user';
+  SelectedGroupContext,
+  SelectedGroupType,
+} from '@/lib/client/providers/selected-group';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -28,17 +28,17 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const { userId, setUserId } = useContext(
-    SelectedUserContext
-  ) as SelectedUserType;
+  const { groupId, setGroupId } = useContext(
+    SelectedGroupContext
+  ) as SelectedGroupType;
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     meta: {
-      userId,
-      onSelectUser: (id: number) => setUserId(id),
+      groupId,
+      onSelectGroup: (id: number) => setGroupId(id),
     },
   });
 
