@@ -1,13 +1,6 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import {
-  Home,
-  LineChart,
-  Menu,
-  ShoppingCart,
-  User,
-  Users
-} from 'lucide-react';
+import { Home, LineChart, Menu, ShoppingCart, User, Users } from 'lucide-react';
 import Link from 'next/link';
 import {
   Card,
@@ -17,7 +10,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
 
 export default function SidebarDrawer() {
   return (
@@ -41,7 +33,7 @@ export default function SidebarDrawer() {
             className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
           >
             <Home className='h-5 w-5' />
-            Dashboard 1
+            Dashboard
           </Link>
           <Link
             href='#'
@@ -54,18 +46,18 @@ export default function SidebarDrawer() {
             </Badge>
           </Link>
           <Link
-            href='#'
+            href='/groups'
             className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
           >
             <Users className='h-5 w-5' />
             Groups
           </Link>
           <Link
-            href='#'
+            href='/users'
             className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
           >
             <User className='h-5 w-5' />
-            People
+            Users
           </Link>
           <Link
             href='#'

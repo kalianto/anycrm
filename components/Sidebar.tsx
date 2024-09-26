@@ -27,7 +27,7 @@ export default function Sidebar() {
   const menuItemClass =
     'flex items-center gap-3 rounded-lg px-3 py-3 transition-all hover:text-primary';
   const menuItemInactive = 'text-muted-foreground';
-  const menuItemActive = 'bg-slate-300';
+  const menuItemActive = 'bg-slate-200';
   return (
     <div className='flex flex-1 hidden border-r bg-muted/40 md:block h-screen overflow-hidden'>
       <div className='flex h-screen max-h-screen flex-col gap-2'>
