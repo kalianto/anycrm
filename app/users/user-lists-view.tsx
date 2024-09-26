@@ -9,6 +9,7 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { NewUserSheet } from './new-user-sheet';
 
 const UserListsView = async () => {
   const users = await getUsers();
@@ -24,7 +25,7 @@ const UserListsView = async () => {
             </CardDescription>
           </div>
           <div className='flex-none w-24'>
-            <Button className='float-right'>Add New</Button>
+            <NewUserSheet />
           </div>
         </div>
       </CardHeader>
