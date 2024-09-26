@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { User } from '@prisma/client';
-import { updateUser } from '@/actions/users/update-user';
+import { createUser } from '@/actions/users/create-user';
 import { useRouter } from 'next/navigation';
 import {
   Form,
@@ -15,6 +15,7 @@ import {
   FormDescription,
   FormMessage,
 } from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
 
@@ -25,53 +26,43 @@ const FormSchema = z.object({
   city: z.string(),
   postcode: z.string(),
   phone: z.string(),
+  email: z.string().email('This is an invalid email address'),
+  status: z.string(),
 });
 
-export const EditUserForm = ({
-  id,
-  preloadedData,
+export const NewUserForm = ({
   onOpenChange,
 }: {
-  id?: number;
-  preloadedData: User | null | undefined;
   onOpenChange: (_open: boolean) => void;
 }) => {
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      firstName: preloadedData?.firstName,
-      lastName: preloadedData?.lastName,
-      street: preloadedData?.street || '',
-      city: preloadedData?.city || '',
-      postcode: preloadedData?.postcode || '',
-      phone: preloadedData?.phone || '',
+      firstName: '',
+      lastName: '',
+      street: '',
+      city: '',
+      postcode: '',
+      phone: '',
+      email: '',
+      status: 'active',
     },
   });
 
   useEffect(() => {
     form.reset();
-  }, [preloadedData, form]);
+  }, [form]);
 
   async function submitForm(data: z.infer<typeof FormSchema>) {
     try {
-      const updateUserObject = await updateUser({
-        userId: id,
-        userDetails: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          street: data.street,
-          city: data.city,
-          postcode: data.postcode,
-          phone: data.phone,
-        },
-      });
-      toast.success(`User details has been updated successfully`);
+      const updateUserObject = await createUser(data);
+      toast.success(`New User has been created successfully`);
       onOpenChange(false);
       router.refresh();
     } catch (err) {
       toast.error('Something went wrong', {
-        description: 'An error occurred while updating user details.',
+        description: 'An error occurred while creating a new user.',
         action: {
           label: 'Close',
           onClick: () => {},
@@ -80,14 +71,23 @@ export const EditUserForm = ({
     }
   }
 
-  if (!preloadedData) {
-    return null;
-  }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submitForm)} className='space-y-6'>
-        <div className='grid gap-4 grid-cols-2'>
+        <FormField
+          control={form.control}
+          name='email'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder='user email address' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className='grid gap-4 grid-cols-2 py-2'>
           <FormField
             control={form.control}
             name='firstName'
@@ -131,7 +131,7 @@ export const EditUserForm = ({
             </FormItem>
           )}
         />
-        <div className='grid gap-4 grid-cols-2'>
+        <div className='grid gap-4 grid-cols-2 py-2'>
           <FormField
             control={form.control}
             name='city'
@@ -159,7 +159,7 @@ export const EditUserForm = ({
             )}
           />
         </div>
-        <div className='grid gap-4 grid-cols-2'>
+        <div className='grid gap-4 grid-cols-2 py-2'>
           <FormField
             control={form.control}
             name='phone'
@@ -176,6 +176,29 @@ export const EditUserForm = ({
                   Include the international code eg. +61 431 234 567
                 </FormDescription>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='status'
+            render={({ field }) => (
+              <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                <div className='space-y-0.5'>
+                  <FormLabel className='text-base'>Status</FormLabel>
+                  <FormDescription>Activate this user?</FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value === 'active' ? true : false}
+                    onCheckedChange={(e) => {
+                      form.setValue(
+                        'status',
+                        e === true ? 'active' : 'inactive'
+                      );
+                    }}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />

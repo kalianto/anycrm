@@ -44,7 +44,7 @@ export default async function RootLayout({
         className='bg-background text-foreground'
         suppressHydrationWarning={true}
       >
-        <SessionProvider session={session} refetchInterval={60}>
+        <SessionProvider session={session}>
           <MainLayout>{children}</MainLayout>
         </SessionProvider>
       </body>

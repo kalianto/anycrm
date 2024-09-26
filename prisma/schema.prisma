@@ -28,6 +28,7 @@ model User {
   groupUserHistory        GroupUserHistory[]       @relation(name: "groupUserHistory")
   groupPermissionHistory  GroupPermissionHistory[] @relation(name: "groupPermissionHistory")
 
+  @@index([email])
   @@map("users")
 }
 

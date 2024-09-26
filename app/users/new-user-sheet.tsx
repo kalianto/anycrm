@@ -10,12 +10,10 @@ import {
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { CreateGroupForm } from './create-group-form';
-import { Group } from '@prisma/client';
+import { NewUserForm } from './new-user-form';
 
-export const GroupSheet = () => {
+export const NewUserSheet = () => {
   const [isSheetOpen, setSheetOpen] = useState(false);
-
   return (
     <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
       {/* overwrite the classname of sm:max-w-sm to set the width of the sheet */}
@@ -25,17 +23,17 @@ export const GroupSheet = () => {
         </Button>
       </SheetTrigger>
       <SheetContent
-        className='md:max-w-2xl sm:max-w-sm mx-auto mt-12'
+        className='lg:max-w-3xl md:max-w-2xl sm:max-w-sm mx-auto mt-12'
         side='top'
       >
         <SheetHeader>
-          <SheetTitle>Group Details</SheetTitle>
+          <SheetTitle>Add New User</SheetTitle>
           <SheetDescription>
-            {`Fill in the group details below. Click save when you're done.`}
+            {`Enter the new user details below. Click save when you're done.`}
           </SheetDescription>
         </SheetHeader>
         <Separator className='my-4' />
-        <CreateGroupForm onOpenChange={setSheetOpen} />
+        <NewUserForm onOpenChange={setSheetOpen} />
       </SheetContent>
     </Sheet>
   );

@@ -4,14 +4,16 @@ import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
 import prisma from '@/lib/prisma';
 
-const jwtTTL = Number(process.env.JWT_TTL) ? Number(process.env.JWT_TTL) : 24;
+const jwtTTL = Number(process.env.JWT_TTL)
+  ? Number(process.env.JWT_TTL)
+  : 24 * 60;
 export const config = {
   // theme: {
   //   logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
   // },
   session: {
     strategy: 'jwt',
-    maxAge: jwtTTL * 60 * 60,
+    maxAge: jwtTTL * 60,
   },
   providers: [
     Google({
@@ -69,7 +71,7 @@ export const config = {
       });
 
       // TODO: allow a settings at the admin level to enable this
-      const autoRegister = true;
+      const autoRegister = false;
 
       // if user doesn't exist, we add it but set it to pending
       // then we send email to verify the user email
