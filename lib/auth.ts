@@ -63,6 +63,7 @@ export const config = {
       });
     },
     async signIn({ user, account, profile }) {
+    async signIn({ user, account, profile }) {
       // check if user exist in our database
       let existingUser = await prisma.user.findUnique({
         where: {
@@ -76,6 +77,7 @@ export const config = {
       // if user doesn't exist, we add it but set it to pending
       // then we send email to verify the user email
       // once verify, we will set the account to active
+      if (!existingUser && autoRegister) {
       if (!existingUser && autoRegister) {
         existingUser = await prisma.user.create({
           data: {
@@ -96,10 +98,19 @@ export const config = {
       if (url.startsWith('/')) return `${baseUrl}${url}`;
 
       return baseUrl;
+      return existingUser?.status === 'active';
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+
+      return baseUrl;
     },
   },
   pages: {
     signIn: '/',
+    signOut: '/',
+    error: '/',
     signOut: '/',
     error: '/',
   },
