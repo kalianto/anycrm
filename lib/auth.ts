@@ -4,10 +4,15 @@ import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
 import prisma from '@/lib/prisma';
 
+const jwtTTL = Number(process.env.JWT_TTL) ? Number(process.env.JWT_TTL) : 24;
 export const config = {
   // theme: {
   //   logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
   // },
+  session: {
+    strategy: 'jwt',
+    maxAge: jwtTTL * 60 * 60,
+  },
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
@@ -27,14 +32,33 @@ export const config = {
   ],
   callbacks: {
     authorized({ request, auth }) {
-      // console.log('🚀🚀🚀 ~ file: auth.ts:34 ~ auth:', auth);
-      const { pathname } = request.nextUrl;
-      if (pathname === '/') return !!auth;
-      return true;
+      // const { pathname } = request.nextUrl;
+      // if (pathname === '/') return !!auth;
+      return !!auth;
+    },
+    async jwt({ token, trigger, session, account }) {
+      // first time login to the system
+      if (account) {
+        console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ account:', account);
+
+        return Promise.resolve({
+          ...token,
+          access_token: account.access_token,
+          refresh_token: account.refresh_token,
+          provider: account.provider,
+        });
+      }
+
+      return Promise.resolve(token);
     },
     async session({ session, token, user }) {
       // add more properties to the session object if we need to
-      return session;
+      return Promise.resolve({
+        ...session,
+        accessToken: token.access_token,
+        refreshToken: token.refresh_token,
+        provider: token.provider,
+      });
     },
     async signIn({ user, account, profile }) {
       // check if user exist in our database
