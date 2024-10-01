@@ -2,7 +2,7 @@
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export const activateUser = async (userId: number) => {
+export const updateStatus = async (userId: number) => {
   const session = await auth();
   if (!session) return null;
 
