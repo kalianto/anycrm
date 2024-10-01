@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { activateUser } from '@/actions/users/activate';
+import { updateStatus } from '@/actions/users/update-status';
 
 type UpdateUserStatusDialogProps = {
   id: number;
@@ -46,7 +46,7 @@ export const UpdateUserStatusDialog = ({
           <AlertDialogAction
             onClick={async () => {
               try {
-                const updateUser = await activateUser(id);
+                const updateUser = await updateStatus(id);
                 const statusText =
                   status === 'active' ? 'deactivated' : 'activated';
                 toast.success(`User status has been "${statusText}"`, {

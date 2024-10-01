@@ -40,27 +40,27 @@ export const config = {
     },
     async jwt({ token, trigger, session, account }) {
       // first time login to the system
-      if (account) {
-        console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ account:', account);
-
-        return Promise.resolve({
-          ...token,
-          access_token: account.access_token,
-          refresh_token: account.refresh_token,
-          provider: account.provider,
-        });
-      }
+      // this is bad, should not expose refresh token to the client
+      // if (account) {
+      //   return Promise.resolve({
+      //     ...token,
+      //     access_token: account.access_token,
+      //     refresh_token: account.refresh_token,
+      //     provider: account.provider,
+      //   });
+      // }
 
       return Promise.resolve(token);
     },
     async session({ session, token, user }) {
       // add more properties to the session object if we need to
-      return Promise.resolve({
-        ...session,
-        accessToken: token.access_token,
-        refreshToken: token.refresh_token,
-        provider: token.provider,
-      });
+      // return Promise.resolve({
+      //   ...session,
+      //   accessToken: token.access_token,
+      //   refreshToken: token.refresh_token,
+      //   provider: token.provider,
+      // });
+      return Promise.resolve(session);
     },
     async signIn({ user, account, profile }) {
       // check if user exist in our database
@@ -87,6 +87,27 @@ export const config = {
           },
         });
         console.log('🚀🚀🚀 ~ file: auth.ts:62 ~ newUser:', existingUser);
+      }
+
+      // update user avatar and provider
+      if (existingUser) {
+        try {
+          await prisma.user.update({
+            where: {
+              id: existingUser.id,
+            },
+            data: {
+              provider: account?.provider,
+              avatar: user?.image,
+              updatedAt: new Date(),
+            },
+          });
+        } catch (err) {
+          console.log(
+            '🚀🚀🚀 ~ AUTH_ERROR: error updating user profile after signin',
+            err
+          );
+        }
       }
 
       return existingUser?.status === 'active';

@@ -11,6 +11,7 @@ interface UpdateUserOptions {
     city: string;
     postcode: string;
     phone: string;
+    status: string;
   };
 }
 
@@ -30,8 +31,11 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
     return { error: 'User Not found' };
   }
 
-  // TODO: Implement RBAC here
+  const status = ['active', 'inactive', 'pending'].includes(userDetails.status)
+    ? userDetails.status
+    : 'pending';
 
+  // TODO: Implement RBAC here
   const updateUser = await prisma.user.update({
     where: {
       id: userId,
@@ -44,6 +48,7 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
       postcode: userDetails.postcode,
       phone: userDetails.phone,
       updatedAt: new Date(),
+      status,
     },
   });
 
