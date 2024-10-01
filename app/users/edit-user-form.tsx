@@ -18,6 +18,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
+import { UserStatus } from '@prisma/client';
 
 const FormSchema = z.object({
   firstName: z.string().min(2).max(255),
@@ -26,7 +27,7 @@ const FormSchema = z.object({
   city: z.string(),
   postcode: z.string(),
   phone: z.string(),
-  status: z.string(),
+  status: z.nativeEnum(UserStatus),
 });
 
 export const EditUserForm = ({
@@ -48,7 +49,7 @@ export const EditUserForm = ({
       city: preloadedData?.city || '',
       postcode: preloadedData?.postcode || '',
       phone: preloadedData?.phone || '',
-      status: preloadedData?.status || 'inactive',
+      status: preloadedData?.status || UserStatus.INACTIVE,
     },
   });
 
@@ -194,11 +195,11 @@ export const EditUserForm = ({
                 </div>
                 <FormControl>
                   <Switch
-                    checked={field.value === 'active' ? true : false}
+                    checked={field.value === UserStatus.ACTIVE ? true : false}
                     onCheckedChange={(e) => {
                       form.setValue(
                         'status',
-                        e === true ? 'active' : 'inactive'
+                        e === true ? UserStatus.ACTIVE : UserStatus.INACTIVE
                       );
                     }}
                   />

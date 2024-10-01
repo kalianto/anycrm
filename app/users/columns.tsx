@@ -2,7 +2,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
-import { User } from '@prisma/client';
+import { User, UserStatus } from '@prisma/client';
 import { UserActionDropdown } from './user-action-dropdown';
 
 export const columns: ColumnDef<User>[] = [
@@ -68,7 +68,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const statusText = row.getValue('status');
       const statusTextClass =
-        statusText === 'active' ? 'text-emerald-500' : 'text-red-400';
+        statusText === UserStatus.ACTIVE ? 'text-emerald-500' : 'text-red-400';
       return (
         <div className={`font-medium ${statusTextClass}`}>
           {(statusText as string).charAt(0).toUpperCase() +
