@@ -1,8 +1,9 @@
 'use server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { UserStatus } from '@prisma/client';
 
-export const activateUser = async (userId: number) => {
+export const updateStatus = async (userId: number) => {
   const session = await auth();
   if (!session) return null;
 
@@ -15,7 +16,10 @@ export const activateUser = async (userId: number) => {
   if (!userToUpdate) {
     return { error: 'Not found' };
   }
-  const status = userToUpdate.status !== 'active' ? 'active' : 'inactive';
+  const status =
+    userToUpdate.status === UserStatus.ACTIVE
+      ? UserStatus.INACTIVE
+      : UserStatus.ACTIVE;
 
   const updateUser = await prisma.user.update({
     where: {

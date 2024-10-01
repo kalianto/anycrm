@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { User } from '@prisma/client';
+import { User, UserStatus } from '@prisma/client';
 import { createUser } from '@/actions/users/create-user';
 import { useRouter } from 'next/navigation';
 import {
@@ -27,7 +27,7 @@ const FormSchema = z.object({
   postcode: z.string(),
   phone: z.string(),
   email: z.string().email('This is an invalid email address'),
-  status: z.string(),
+  status: z.nativeEnum(UserStatus),
 });
 
 export const NewUserForm = ({
@@ -46,7 +46,7 @@ export const NewUserForm = ({
       postcode: '',
       phone: '',
       email: '',
-      status: 'active',
+      status: UserStatus.ACTIVE,
     },
   });
 
@@ -190,11 +190,11 @@ export const NewUserForm = ({
                 </div>
                 <FormControl>
                   <Switch
-                    checked={field.value === 'active' ? true : false}
+                    checked={field.value === UserStatus.ACTIVE ? true : false}
                     onCheckedChange={(e) => {
                       form.setValue(
                         'status',
-                        e === true ? 'active' : 'inactive'
+                        e === true ? UserStatus.ACTIVE : UserStatus.INACTIVE
                       );
                     }}
                   />

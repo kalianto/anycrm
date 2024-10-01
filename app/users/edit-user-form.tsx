@@ -15,8 +15,10 @@ import {
   FormDescription,
   FormMessage,
 } from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
+import { UserStatus } from '@prisma/client';
 
 const FormSchema = z.object({
   firstName: z.string().min(2).max(255),
@@ -25,6 +27,7 @@ const FormSchema = z.object({
   city: z.string(),
   postcode: z.string(),
   phone: z.string(),
+  status: z.nativeEnum(UserStatus),
 });
 
 export const EditUserForm = ({
@@ -32,7 +35,7 @@ export const EditUserForm = ({
   preloadedData,
   onOpenChange,
 }: {
-  id?: number;
+  id: number;
   preloadedData: User | null | undefined;
   onOpenChange: (_open: boolean) => void;
 }) => {
@@ -46,6 +49,7 @@ export const EditUserForm = ({
       city: preloadedData?.city || '',
       postcode: preloadedData?.postcode || '',
       phone: preloadedData?.phone || '',
+      status: preloadedData?.status || UserStatus.INACTIVE,
     },
   });
 
@@ -64,6 +68,7 @@ export const EditUserForm = ({
           city: data.city,
           postcode: data.postcode,
           phone: data.phone,
+          status: data.status,
         },
       });
       toast.success(`User details has been updated successfully`);
@@ -176,6 +181,29 @@ export const EditUserForm = ({
                   Include the international code eg. +61 431 234 567
                 </FormDescription>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='status'
+            render={({ field }) => (
+              <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                <div className='space-y-0.5'>
+                  <FormLabel className='text-base'>Status</FormLabel>
+                  <FormDescription>Activate this user?</FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value === UserStatus.ACTIVE ? true : false}
+                    onCheckedChange={(e) => {
+                      form.setValue(
+                        'status',
+                        e === true ? UserStatus.ACTIVE : UserStatus.INACTIVE
+                      );
+                    }}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />

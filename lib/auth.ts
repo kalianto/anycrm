@@ -7,6 +7,9 @@ import prisma from '@/lib/prisma';
 const jwtTTL = Number(process.env.JWT_TTL)
   ? Number(process.env.JWT_TTL)
   : 24 * 60;
+const jwtTTL = Number(process.env.JWT_TTL)
+  ? Number(process.env.JWT_TTL)
+  : 24 * 60;
 export const config = {
   // theme: {
   //   logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
@@ -40,29 +43,28 @@ export const config = {
     },
     async jwt({ token, trigger, session, account }) {
       // first time login to the system
-      if (account) {
-        console.log('🚀🚀🚀 ~ file: auth.ts:38 ~ account:', account);
-
-        return Promise.resolve({
-          ...token,
-          access_token: account.access_token,
-          refresh_token: account.refresh_token,
-          provider: account.provider,
-        });
-      }
+      // this is bad, should not expose refresh token to the client
+      // if (account) {
+      //   return Promise.resolve({
+      //     ...token,
+      //     access_token: account.access_token,
+      //     refresh_token: account.refresh_token,
+      //     provider: account.provider,
+      //   });
+      // }
 
       return Promise.resolve(token);
     },
     async session({ session, token, user }) {
       // add more properties to the session object if we need to
-      return Promise.resolve({
-        ...session,
-        accessToken: token.access_token,
-        refreshToken: token.refresh_token,
-        provider: token.provider,
-      });
+      // return Promise.resolve({
+      //   ...session,
+      //   accessToken: token.access_token,
+      //   refreshToken: token.refresh_token,
+      //   provider: token.provider,
+      // });
+      return Promise.resolve(session);
     },
-    async signIn({ user, account, profile }) {
     async signIn({ user, account, profile }) {
       // check if user exist in our database
       let existingUser = await prisma.user.findUnique({
@@ -74,10 +76,12 @@ export const config = {
       // TODO: allow a settings at the admin level to enable this
       const autoRegister = false;
 
+      // TODO: allow a settings at the admin level to enable this
+      const autoRegister = false;
+
       // if user doesn't exist, we add it but set it to pending
       // then we send email to verify the user email
       // once verify, we will set the account to active
-      if (!existingUser && autoRegister) {
       if (!existingUser && autoRegister) {
         existingUser = await prisma.user.create({
           data: {
@@ -91,13 +95,27 @@ export const config = {
         console.log('🚀🚀🚀 ~ file: auth.ts:62 ~ newUser:', existingUser);
       }
 
-      return existingUser?.status === 'active';
-    },
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith('/')) return `${baseUrl}${url}`;
+      // update user avatar and provider
+      if (existingUser) {
+        try {
+          await prisma.user.update({
+            where: {
+              id: existingUser.id,
+            },
+            data: {
+              provider: account?.provider,
+              avatar: user?.image,
+              updatedAt: new Date(),
+            },
+          });
+        } catch (err) {
+          console.log(
+            '🚀🚀🚀 ~ AUTH_ERROR: error updating user profile after signin',
+            err
+          );
+        }
+      }
 
-      return baseUrl;
       return existingUser?.status === 'active';
     },
     async redirect({ url, baseUrl }) {
@@ -109,8 +127,6 @@ export const config = {
   },
   pages: {
     signIn: '/',
-    signOut: '/',
-    error: '/',
     signOut: '/',
     error: '/',
   },

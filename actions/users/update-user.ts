@@ -1,6 +1,7 @@
 'use server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { UserStatus } from '@prisma/client';
 
 interface UpdateUserOptions {
   userId: number;
@@ -11,6 +12,7 @@ interface UpdateUserOptions {
     city: string;
     postcode: string;
     phone: string;
+    status: UserStatus;
   };
 }
 
@@ -30,8 +32,11 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
     return { error: 'User Not found' };
   }
 
-  // TODO: Implement RBAC here
+  const status = Object.values(UserStatus).includes(userDetails.status)
+    ? userDetails.status
+    : UserStatus.PENDING;
 
+  // TODO: Implement RBAC here
   const updateUser = await prisma.user.update({
     where: {
       id: userId,
@@ -44,6 +49,7 @@ export const updateUser = async (userOptions: UpdateUserOptions) => {
       postcode: userDetails.postcode,
       phone: userDetails.phone,
       updatedAt: new Date(),
+      status,
     },
   });
 
