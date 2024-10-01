@@ -76,6 +76,9 @@ export const config = {
       // TODO: allow a settings at the admin level to enable this
       const autoRegister = false;
 
+      // TODO: allow a settings at the admin level to enable this
+      const autoRegister = false;
+
       // if user doesn't exist, we add it but set it to pending
       // then we send email to verify the user email
       // once verify, we will set the account to active
