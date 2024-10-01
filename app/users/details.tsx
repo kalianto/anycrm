@@ -12,8 +12,6 @@ import {
   SelectedUserType,
 } from '@/lib/client/providers/selected-user';
 import { match } from 'ts-pattern';
-} from '@/lib/client/providers/selected-user';
-import { match } from 'ts-pattern';
 
 const UserDetailsView = () => {
   const { userId } = useContext(SelectedUserContext) as SelectedUserType;

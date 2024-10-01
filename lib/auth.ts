@@ -7,9 +7,6 @@ import prisma from '@/lib/prisma';
 const jwtTTL = Number(process.env.JWT_TTL)
   ? Number(process.env.JWT_TTL)
   : 24 * 60;
-const jwtTTL = Number(process.env.JWT_TTL)
-  ? Number(process.env.JWT_TTL)
-  : 24 * 60;
 export const config = {
   // theme: {
   //   logo: 'https://next-auth.js.org/img/logo/logo-sm.png',
@@ -72,9 +69,6 @@ export const config = {
           email: user?.email!,
         },
       });
-
-      // TODO: allow a settings at the admin level to enable this
-      const autoRegister = false;
 
       // TODO: allow a settings at the admin level to enable this
       const autoRegister = false;
