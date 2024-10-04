@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Bell, Home, LineChart, ShoppingCart, User, Users } from 'lucide-react';
+import { Bell, Home, LineChart, User, Users, ContactRound } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -52,16 +52,16 @@ export default function Sidebar() {
               Dashboard
             </Link>
             <Link
-              href='/orders'
+              href='/clients'
               className={`${menuItemClass} ${
-                pathname === '/orders' ? menuItemActive : menuItemInactive
+                pathname === '/clients' ? menuItemActive : menuItemInactive
               }`}
             >
-              <ShoppingCart className='h-4 w-4' />
-              Orders
-              <Badge className='ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full'>
+              <ContactRound className='h-4 w-4' />
+              Clients
+              {/* <Badge className='ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full'>
                 6
-              </Badge>
+              </Badge> */}
             </Link>
             <Link
               href='/analytics'
