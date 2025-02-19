@@ -25,7 +25,7 @@ export const GroupSheet = () => {
         </Button>
       </SheetTrigger>
       <SheetContent
-        className='md:max-w-2xl sm:max-w-sm mx-auto mt-12'
+        className='fixed place-items-center max-h-screen overflow-y-auto md:max-w-2xl sm:max-w-sm mx-auto mt-12'
         side='top'
       >
         <SheetHeader>

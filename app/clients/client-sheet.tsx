@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
+  SheetOverlay,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
@@ -24,7 +25,7 @@ export const ClientSheet = () => {
         </Button>
       </SheetTrigger>
       <SheetContent
-        className='md:max-w-2xl sm:max-w-sm mx-auto mt-12'
+        className='inset-0 place-items-center max-h-screen overflow-y-auto md:max-w-2xl sm:max-w-sm mx-auto mt-12'
         side='top'
       >
         <SheetHeader>

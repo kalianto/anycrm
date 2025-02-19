@@ -14,7 +14,7 @@ const ClientListView = async () => {
   const groups = await getClients();
 
   return (
-    <Card>
+    <Card className='w-full'>
       <CardHeader className='px-7'>
         <div className='flex flex-row'>
           <div className='grow'>
@@ -28,7 +28,7 @@ const ClientListView = async () => {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className='w-full'>
         <DataTable columns={columns} data={groups} />
       </CardContent>
     </Card>
